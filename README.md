@@ -9,7 +9,7 @@
 ```
 ### 引用
 ```
-  let wsConn = require('ws-up-client');
+  let wsConn = require('@up/ws-up-client');
 ```
 
 ### 连接并注册 - connectServer
@@ -38,8 +38,9 @@
           wsUrl: 'ws://172.16.8.147:13181/websocket', // websocket地址
           bid: '2100',  // 业务id
           bName: 'OEMFZQZ', // 业务名称
-          xua:'app', // 设备类型
-          heartInterval: 20000 // 心跳执行间隔
+          xua:'app', // 设备类型, 默认app
+          reconnectInterval: 1000, // 重连时间间隔,默认1000ms
+          heartInterval: 20000 // 心跳执行间隔,默认20000ms
       };
       // 建立连接并注册
       wsConn.connectServer(option, clientInfo, receiveData);
