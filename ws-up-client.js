@@ -89,7 +89,8 @@ module.exports = {
                 xua: this.config.xua,
                 uid: clientInfo.userId,
                 bid: this.config.bid,
-                token: clientInfo.token
+                token: clientInfo.token,
+                groups: clientInfo.groups
             })
         };
         this.socket && this.socket.send(JSON.stringify(message));
