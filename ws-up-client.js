@@ -118,6 +118,7 @@ module.exports = {
                         groupId: msgInfo.groupId,
                         from: msgInfo.from,
                         to: msgInfo.targetId,
+                        isM: msgInfo.isM,
                         content: JSON.stringify({type: msgInfo.type, content: msgInfo.content})
                     })
                 }

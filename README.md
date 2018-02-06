@@ -65,6 +65,7 @@
                        groupId: 'live_1',
                        from: "xiaodm",
                        to: "",
+                       isM:'0'  // 是否是圈主发送
                        content: JSON.stringify({type: 0, content: 'test im content2'})
                    })
 ```
@@ -76,6 +77,7 @@
           type: '1',   // 发送内容类型，由业务自行约定,如(1:文字  2:图片(Base64) 3：图片url 4：短语音url 5：短视频url)
           targetId: 'live_1',  // 目标id
           groupId: 'live_1',  // 组id
-          from: 'testUser1'  // 发送者id
+          from: 'testUser1',  // 发送者信息
+          isM:'0'  // 是否是圈主发送
       });
 ```
