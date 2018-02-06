@@ -32,6 +32,7 @@
 ```  javascript
      let clientInfo = {
           userId: 'testUser1',   // 用户id
+          groups:['live_1'],    // 圈子id
           token: 'testUser1'   // 用户token，依实际传递
       };
       let option = {
@@ -44,6 +45,28 @@
       };
       // 建立连接并注册
       wsConn.connectServer(option, clientInfo, receiveData);
+
+      //接受消息
+      const receiveData = function (data) {
+          console.log('receive server Data:' + data);
+          let retData = JSON.parse(data);
+          if(retData.cmd === 7) {
+              // cmd:7标识接受业务消息
+              let bzData = JSON.parse(JSON.parse(retData.extra_data).dataStr);
+              console.log(bzData);
+              // TODO 业务处理代码
+          }
+       };
+
+       // bzData的格式为：
+                    {
+                       business: 'OEMFZQZ',
+                       type: 2,
+                       groupId: 'live_1',
+                       from: "xiaodm",
+                       to: "",
+                       content: JSON.stringify({type: 0, content: 'test im content2'})
+                   })
 ```
 
 ### 发送消息 - connectServer
