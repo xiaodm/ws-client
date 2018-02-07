@@ -1,4 +1,4 @@
-## IM WEB Websocket client
+## IM Web Websocket Client
 与后台组连接服务的集成客户端帮助类,供web页面使用：
 * 集成后台组连接服务
 * 连接、登录、心跳、重连、发送、订阅消息
@@ -111,8 +111,11 @@
 
 ### 事件
 * onopen
+``` JavaScript
 wsConn.onopen = ()=>{
    // 执行open后的一些业务。
 }
+```
+
 * onclose
 
