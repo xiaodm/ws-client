@@ -98,10 +98,9 @@ module.exports = {
     },
     /**
      * 发送消息
-     * @param msgInfo 消息对象
+     * @param paramInfo 消息参数
      */
-    sendMsg: function (msgInfo) {
-        console.log('sendMsg begin');
+    sendMsg: function (paramInfo) {
         var message = {
             cmd: 7,
             requestId: this.requestId++,
@@ -112,21 +111,14 @@ module.exports = {
                 data: {
                     cmdType: 1,
                     type: 1,
-                    dataStr: JSON.stringify({
-                        business: this.config.bName,
-                        type: 2,
-                        groupId: msgInfo.groupId,
-                        from: msgInfo.from,
-                        to: msgInfo.targetId,
-                        isM: msgInfo.isM,
-                        content: JSON.stringify({type: msgInfo.type, content: msgInfo.content})
-                    })
+                    dataStr: JSON.stringify(Object.assign({
+                        business: this.config.bName
+                    },paramInfo))
                 }
             })
         };
 
         this.socket && this.socket.send(JSON.stringify(message));
-        console.log('sendMsg end');
     },
     /**
      * 心跳
