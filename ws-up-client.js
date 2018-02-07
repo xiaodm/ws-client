@@ -97,6 +97,25 @@ module.exports = {
         console.log('registerClient end');
     },
     /**
+     * 进入、退出群组
+     * @param {object} clientInfo {userId: 'xxx',groupId: 'xxxx'}
+     *  @param {int} groupStatus  12：enter 13：exit
+     */
+    changeGroup: function (clientInfo, groupStatus) {
+        var message = {
+            cmd: groupStatus,
+            requestId: this.requestId++,
+            extra_data: JSON.stringify({
+                uid: clientInfo.userId,
+                bid: this.config.bid,
+                guid: clientInfo.userId,
+                groupId: clientInfo.groupId
+            })
+        };
+        this.socket && this.socket.send(JSON.stringify(message));
+        console.log('changeGroup end');
+    },
+    /**
      * 发送消息
      * @param paramInfo 消息参数
      */
@@ -113,7 +132,7 @@ module.exports = {
                     type: 1,
                     dataStr: JSON.stringify(Object.assign({
                         business: this.config.bName
-                    },paramInfo))
+                    }, paramInfo))
                 }
             })
         };

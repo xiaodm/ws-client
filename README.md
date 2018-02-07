@@ -32,8 +32,8 @@
 
 ```  javascript
      let clientInfo = {
-          userId: 'testUser1',   // 用户id
-          groups:['live_1'],    // 圈子id
+          userId: 'testUser1',   // 必填项;用户id
+          groups:['live_1'],    // 必填项;圈子id
           token: 'testUser1'   // 用户token，依实际传递
       };
       let option = {
@@ -109,6 +109,15 @@
       });
 ```
 
+### 进入、退出群组 - changeGroup
+按需集成。
+
+参数：
+* clientInfo
+json对象： {userId: 'xxx',groupId: 'xxxx'}
+
+* groupStatus
+状态, int类型:  12：enter 13：exit
 
 ### 事件
 * onopen
