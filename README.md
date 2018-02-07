@@ -10,6 +10,7 @@
 ### 引用
 ```
   let wsConn = require('@up/ws-up-client');
+  // 或 import wsConn from '@up/ws-up-client';
 ```
 
 ### 连接并注册 - connectServer
@@ -36,9 +37,9 @@
           token: 'testUser1'   // 用户token，依实际传递
       };
       let option = {
-          wsUrl: 'ws://172.16.8.147:13181/websocket', // websocket地址
-          bid: '2100',  // 业务id
-          bName: 'OEMFZQZ', // 业务名称
+          wsUrl: 'ws://172.16.8.147:13181/websocket', // 必填项; websocket地址
+          bid: '2100',  // 必填项; 业务id
+          bName: 'OEMFZQZ', // 必填项; 业务名称
           xua:'app', // 设备类型, 默认app
           reconnectInterval: 1000, // 重连时间间隔,默认1000ms
           heartInterval: 20000 // 心跳执行间隔,默认20000ms
@@ -95,7 +96,7 @@
       });
 ```
 
-### 查询消息 - queryMsg
+### 查询消息 - sendMsg
 ```  javascript
    wsConn.sendMsg({
           reqType: 2,  // 必填项; 1: 发送文字消息  2：查询消息列表
