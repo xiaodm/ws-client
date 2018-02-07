@@ -87,7 +87,7 @@
 ```  javascript
    wsConn.sendMsg({
           reqType: 1,  // 必填项; 1: 发送文字消息  2：查询消息列表
-          content: JSON.stringify({type: 1, content: 'test im content2'})  // 必填项; type:发送内容类型，由业务自行约定,如(1:文字  2:图片(Base64) 3：图片url 4：短语音url 5：短视频url)   content:消息内容
+          content: JSON.stringify({type: 1, content: 'test im content2'}),  // 必填项; type:发送内容类型，由业务自行约定,如(1:文字  2:图片(Base64) 3：图片url 4：短语音url 5：短视频url)   content:消息内容
           toType: 1, // 必填项; 发送目标类型 (1：群组  2：私聊)
           toUId: 'userId1',  // 私聊时赋值; 目标用户id
           groupId: 'live_1',  // 圈子内消息时赋值; 组id
@@ -108,4 +108,11 @@
       });
 ```
 
+
+### 事件
+* onopen
+wsConn.onopen = ()=>{
+   // 执行open后的一些业务。
+}
+* onclose
 
