@@ -59,28 +59,13 @@
           }
        };
 
-       // 文字消息 - bzData的格式为：
+          // 消息 - bzData的格式为：
                     {
-                         reqType: 1,  // 1: 文字消息  2：返回的列表消息
-                         content: JSON.stringify({type: 1, content: 'test im content2'}),  // type:发送内容类型，由业务自行约定,如(1:文字  2:图片(Base64) 3：图片url 4：短语音url 5：短视频url)   content:消息内容
-                         toType: 1, // 发送目标类型 (1：群组  2：私聊)
-                         toUId: 'userId1',  // 目标用户id (私聊时赋值)
+                         content: JSON.stringify([{msgId:'xxxx',type: 1, content: 'test im content2', from:{uId:'xx',avatar:'http://xxxx/123.jpg',name:'myname'},isMaster:'2',time:1518082121067}]),  // type:发送内容类型，由业务自行约定,如(1:文字  2:图片(Base64) 3：图片url 4：短语音url 5：短视频url)   content:消息内容 ;
                          groupId: 'live_1',  // 组id
-                         from: 'testUser1',  // 发送者信息
-                         master: 2  // 1：圈主发送  2： 用户发送
+                         master:  2, // 必填项; 1：圈主消息  2： 圈子所有消息
                    })
 
-
-      // 查询返回的列表消息 - bzData的格式为：
-                         {
-                            reqType: 2,  // 1: 文字消息  2：返回的列表消息
-                            content: JSON.stringify([msg list]), // 消息列表
-                            groupId: 'live_1',  // 组id
-                            dir: 1,   // 方向标识 1：向下拉取最新的交易圈内容；2：向上拉取旧的交易圈内容
-                            st: 0,  // 开始id
-                            size: 10,   // 大小
-                            master:  2 // 1：圈主消息  2： 圈子所有消息
-                         })
 ```
 
 ### 发送消息 - sendMsg
@@ -92,7 +77,7 @@
           toUId: 'userId1',  // 私聊时赋值; 目标用户id
           groupId: 'live_1',  // 圈子内消息时赋值; 组id
           from: 'testUser1',  // 必填项; 发送者信息
-          master: 2  // 必填项; 1：圈主发送  2： 用户发送
+          uType: 3  // 1：系统  2： 圈主  3：用户
       });
 ```
 
@@ -100,6 +85,7 @@
 ```  javascript
    wsConn.sendMsg({
           reqType: 2,  // 必填项; 1: 发送文字消息  2：查询消息列表
+          from: 'testUser1',  // 必填项; 发送者id
           groupId: 'live_1',  // 必填项; 组id
           dir: 1,   // 必填项; 方向标识 1：向下拉取最新的交易圈内容；2：向上拉取旧的交易圈内容4：短语音url 5：短视频url)
           st: 0,  // 必填项; 开始id
@@ -114,7 +100,7 @@
 
 参数：
 * clientInfo
-json对象： {userId: 'xxx',groupId: 'xxxx'}
+json对象： {userId: 'xxx',groupId: 'xxxx',deviceId:'xxx'}
 
 * groupStatus
 状态, int类型:  12：enter 13：exit

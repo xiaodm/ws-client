@@ -98,7 +98,7 @@ module.exports = {
     },
     /**
      * 进入、退出群组
-     * @param {object} clientInfo {userId: 'xxx',groupId: 'xxxx'}
+     * @param {object} clientInfo {userId: 'xxx',deviceId:'xxx',groupId: 'xxxx'}
      *  @param {int} groupStatus  12：enter 13：exit
      */
     changeGroup: function (clientInfo, groupStatus) {
@@ -108,7 +108,7 @@ module.exports = {
             extra_data: JSON.stringify({
                 uid: clientInfo.userId,
                 bid: this.config.bid,
-                guid: clientInfo.userId,
+                deviceId: clientInfo.deviceId,
                 groupId: clientInfo.groupId
             })
         };
