@@ -169,6 +169,15 @@ module.exports = {
 
     },
     /**
+     * 关闭连接
+     */
+    close:function () {
+        this.forceClose = true;
+        if(this.socket) {
+            this.socket.close();
+        }
+    },
+    /**
      * onopen 事件
      */
     onopen: function () {
