@@ -34,13 +34,15 @@
      let clientInfo = {
           userId: 'testUser1',   // 必填项;用户id
           groups:['live_1'],    // 必填项;圈子id
-          token: 'testUser1'   // 用户token，依实际传递
+          token: 'testUser1',   // 用户token，依实际传递
+          guid:'',  // 必填项;唯一id，web端可自动生成guid，app可取设备id
       };
       let option = {
           wsUrl: 'ws://172.16.8.147:13181/websocket', // 必填项; websocket地址
           bid: '2100',  // 必填项; 业务id
           bName: 'OEMFZQZ', // 必填项; 业务名称
           xua:'app', // 设备类型, 默认app
+          kickoff:true, //  可选项，true表示需要互踢(默认)，false表示不用互踢
           reconnectInterval: 1000, // 重连时间间隔,默认1000ms
           heartInterval: 20000 // 心跳执行间隔,默认20000ms
       };
@@ -100,7 +102,7 @@
 
 参数：
 * clientInfo
-json对象： {userId: 'xxx',groupId: 'xxxx',deviceId:'xxx'}
+json对象： {userId: 'xxx',groupId: 'xxxx'}
 
 * groupStatus
 状态, int类型:  12：enter 13：exit

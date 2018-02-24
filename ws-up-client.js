@@ -14,6 +14,7 @@ module.exports = {
         bid: '',  // 业务id
         bName: '', // 业务名称
         xua: 'app', // 设备类型
+        kickoff: true, // true表示需要互踢，false表示不用互踢
         reconnectInterval: 1000, // 重连时间间隔
         heartInterval: 20000 // 心跳执行间隔
     },
@@ -40,6 +41,7 @@ module.exports = {
         let _self = this;
         if (window && ('WebSocket' in window)) {
             _self.socket = new WebSocket(_self.config.wsUrl);
+            _self.forceClose = false;
         }
         else {
             console.log('浏览器不支持webSocket');
@@ -85,12 +87,13 @@ module.exports = {
             cmd: 1,
             requestId: this.requestId++,
             extra_data: JSON.stringify({
-                guid: clientInfo.userId,
+                guid: clientInfo.guid || clientInfo.userId,
                 xua: this.config.xua,
                 uid: clientInfo.userId,
                 bid: this.config.bid,
                 token: clientInfo.token,
-                groups: clientInfo.groups
+                groups: clientInfo.groups,
+                kickoff: this.config.kickoff
             })
         };
         this.socket && this.socket.send(JSON.stringify(message));
@@ -108,7 +111,6 @@ module.exports = {
             extra_data: JSON.stringify({
                 uid: clientInfo.userId,
                 bid: this.config.bid,
-                deviceId: clientInfo.deviceId,
                 groupId: clientInfo.groupId
             })
         };
@@ -156,11 +158,12 @@ module.exports = {
                 requestId: this.requestId++,
                 extra_data: JSON.stringify({
                     isHeart: 'true',
-                    guid: clientInfo.userId,
+                    guid: clientInfo.guid || clientInfo.userId,
                     xua: _config.xua,
                     uid: clientInfo.userId,
                     bid: _config.bid,
-                    token: clientInfo.token
+                    token: clientInfo.token,
+                    kickoff: _config.kickoff
                 })
             };
             selfSocket && selfSocket.send(JSON.stringify(message));
@@ -175,6 +178,10 @@ module.exports = {
         this.forceClose = true;
         if(this.socket) {
             this.socket.close();
+        }
+        if (this.inters) {
+            clearInterval(this.inters);
+            this.inters = null;
         }
     },
     /**
